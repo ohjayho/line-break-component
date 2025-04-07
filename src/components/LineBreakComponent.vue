@@ -2,9 +2,12 @@
   <p v-if="!isMobile" v-for="desktopContent in splittedDesktopContent">
     {{ desktopContent }}
   </p>
-  <p v-if="isMobile" v-for="mobileContent in splittedMobileContent">
-    {{ mobileContent }}
-  </p>
+  <template
+    v-if="isMobile"
+    v-for="(mobileContent, index) in splittedMobileContent"
+  >
+    <p :class="{ pseudoPragraphTag: index > 0 }">{{ mobileContent }}</p>
+  </template>
 </template>
 
 <script setup lang="ts">
