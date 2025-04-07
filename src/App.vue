@@ -9,6 +9,7 @@ const content = {
 
 <template>
   <LineBreakComponent :content="content" />
+  <RouterView />
 </template>
 
 <style scoped></style>

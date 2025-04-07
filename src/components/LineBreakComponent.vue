@@ -1,9 +1,17 @@
 <template>
-  <p v-for="desktopContent in splittedDesktopContent">{{ desktopContent }}</p>
-  <p v-for="mobileContent in splittedMobileContent">{{ mobileContent }}</p>
+  <p v-if="!isMobile" v-for="desktopContent in splittedDesktopContent">
+    {{ desktopContent }}
+  </p>
+  <p v-if="isMobile" v-for="mobileContent in splittedMobileContent">
+    {{ mobileContent }}
+  </p>
 </template>
 
 <script setup lang="ts">
+import { useCheckMobileStore } from "@/stores/useCheckMobileStore";
+import { storeToRefs } from "pinia";
+import { onMounted, onUnmounted } from "vue";
+
 const props = defineProps<{
   content: {
     mobile: string;
@@ -11,8 +19,19 @@ const props = defineProps<{
   };
 }>();
 
+const checkMobileStore = useCheckMobileStore();
+const { isMobile } = storeToRefs(checkMobileStore);
+
 const splittedMobileContent = props.content.mobile.split("\n");
 const splittedDesktopContent = props.content.desktop.split("\n");
+
+onMounted(() => {
+  window.addEventListener("resize", checkMobileStore.onCheckMobile);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkMobileStore.onCheckMobile);
+});
 </script>
 
 <style scoped>
