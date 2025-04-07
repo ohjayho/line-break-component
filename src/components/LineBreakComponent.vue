@@ -6,7 +6,7 @@
     v-if="isMobile"
     v-for="(mobileContent, index) in splittedMobileContent"
   >
-    <p :class="{ pseudoPragraphTag: index > 0 }">{{ mobileContent }}</p>
+    <p :class="{ pseudoParagraphTag: index > 0 }">{{ mobileContent }}</p>
   </template>
 </template>
 
