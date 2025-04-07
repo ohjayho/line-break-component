@@ -1,5 +1,6 @@
 <template>
-  <p></p>
+  <p v-for="desktopContent in splittedDesktopContent">{{ desktopContent }}</p>
+  <p v-for="mobileContent in splittedMobileContent">{{ mobileContent }}</p>
 </template>
 
 <script setup lang="ts">
